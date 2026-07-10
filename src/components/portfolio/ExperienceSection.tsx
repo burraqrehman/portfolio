@@ -139,7 +139,7 @@ const StackingExperienceCard = ({
             boxShadow: useTransform(
               shadowOpacity,
               (v) =>
-                `0 20px 50px -12px rgba(225, 29, 72, ${0.12 * v}), 0 8px 20px -8px rgba(0, 0, 0, ${0.08 * v}), 0 0 0 1px rgba(225, 29, 72, ${0.08 * v})`
+                `0 20px 50px -12px rgba(5, 150, 105, ${0.12 * v}), 0 8px 20px -8px rgba(0, 0, 0, ${0.08 * v}), 0 0 0 1px rgba(5, 150, 105, ${0.08 * v})`
             ),
           }}
           whileHover={{
@@ -280,8 +280,8 @@ export const ExperienceSection = () => {
         "Contributed to internal tooling that improved developer productivity",
       ],
       icon: Briefcase,
-      color: "text-rose-600",
-      bgGradient: "#e11d48, #be123c",
+      color: "text-emerald-600",
+      bgGradient: "#059669, #047857",
       category: "Full Stack Development",
     },
     {

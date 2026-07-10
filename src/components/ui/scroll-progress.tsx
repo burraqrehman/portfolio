@@ -13,7 +13,7 @@ export const ScrollProgress = () => {
       className="fixed top-0 left-0 right-0 h-1 z-50 origin-left"
       style={{ scaleX }}
     >
-      <div className="h-full bg-gradient-to-r from-primary via-accent to-rose-400 shadow-lg shadow-primary/50" />
+      <div className="h-full bg-gradient-to-r from-primary via-accent to-teal-400 shadow-lg shadow-primary/50" />
     </motion.div>
   );
 };
