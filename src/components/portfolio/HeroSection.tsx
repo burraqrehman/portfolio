@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronDown, Sparkles, Brain, Cpu, Rocket, User, MessageCircle, Smartphone, Code } from "lucide-react";
+import { ChevronDown, Sparkles, Rocket, User, MessageCircle, Download, Code, Server } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 
@@ -38,10 +38,10 @@ const InteractiveParticles = () => {
       particlesRef.current = [];
       // Reduce particle count on mobile for better performance
       const isMobile = window.innerWidth < 768;
-      const particleCount = isMobile 
+      const particleCount = isMobile
         ? Math.min(15, Math.floor((canvas.width * canvas.height) / 40000))
         : Math.min(35, Math.floor((canvas.width * canvas.height) / 20000));
-      
+
       for (let i = 0; i < particleCount; i++) {
         particlesRef.current.push({
           x: Math.random() * canvas.width,
@@ -49,7 +49,7 @@ const InteractiveParticles = () => {
           vx: (Math.random() - 0.5) * (isMobile ? 0.3 : 0.5),
           vy: (Math.random() - 0.5) * (isMobile ? 0.3 : 0.5),
           size: Math.random() * (isMobile ? 1.5 : 2) + 1,
-          color: ['#0ea5e9', '#8b5cf6', '#06b6d4'][Math.floor(Math.random() * 3)],
+          color: ['#059669', '#14b8a6', '#10b981'][Math.floor(Math.random() * 3)],
           opacity: Math.random() * 0.5 + 0.3
         });
       }
@@ -65,7 +65,7 @@ const InteractiveParticles = () => {
         const dx = mousePos.x - particle.x;
         const dy = mousePos.y - particle.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        
+
         if (distance < 100) {
           const force = (100 - distance) / 100;
           particle.vx += (dx / distance) * force * 0.01;
@@ -142,6 +142,17 @@ const InteractiveParticles = () => {
   );
 };
 
+/** One animated line of the background Ruby snippet. */
+const CodeLine = ({ delay, indent = 0, children }: { delay: number; indent?: number; children: React.ReactNode }) => (
+  <motion.div
+    className={`text-secondary ${indent === 1 ? "ml-4" : indent === 2 ? "ml-8" : indent === 3 ? "ml-12" : ""}`}
+    animate={{ opacity: [0.5, 1, 0.5] }}
+    transition={{ duration: 2, repeat: Infinity, delay }}
+  >
+    {children}
+  </motion.div>
+);
+
 export const HeroSection = () => {
   const scrollToAbout = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
@@ -156,67 +167,67 @@ export const HeroSection = () => {
   };
 
   return (
-    <section 
-      id="hero" 
+    <section
+      id="hero"
       className="min-h-screen flex flex-col items-center justify-center relative ai-bg pt-20 overflow-hidden"
     >
       {/* Background Effects */}
       <InteractiveParticles />
-      {/* AI Model Function Background */}
+      {/* Rails Service Object Background */}
       <div className="absolute inset-0 pointer-events-none opacity-10">
         {/* Background animations */}
         <div className="absolute inset-0">
           {/* Floating orbs in background */}
-        <motion.div
+          <motion.div
             className="absolute top-1/4 right-1/4 w-16 h-16 md:w-32 md:h-32 rounded-full bg-gradient-to-r from-primary/5 to-accent/5 blur-3xl"
-          animate={{ 
+            animate={{
               scale: [1, 1.2, 1],
               opacity: [0.3, 0.6, 0.3],
-            x: [0, 15, 0],
+              x: [0, 15, 0],
               y: [0, -10, 0]
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div
             className="absolute bottom-1/3 left-1/3 w-12 h-12 md:w-24 md:h-24 rounded-full bg-gradient-to-r from-secondary/5 to-primary/5 blur-2xl"
-          animate={{ 
+            animate={{
               scale: [1, 1.3, 1],
               opacity: [0.2, 0.5, 0.2],
-            x: [0, -12, 0],
+              x: [0, -12, 0],
               y: [0, 12, 0]
-          }}
+            }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-        />
-        <motion.div
+          />
+          <motion.div
             className="absolute top-2/3 right-1/3 w-10 h-10 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-accent/5 to-secondary/5 blur-xl"
-          animate={{ 
+            animate={{
               scale: [1, 1.1, 1],
               opacity: [0.4, 0.7, 0.4],
-            x: [0, 10, 0],
+              x: [0, 10, 0],
               y: [0, -8, 0]
             }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 4 }}
           />
 
           {/* Floating tech icons - hidden on mobile for performance */}
-            <motion.div
+          <motion.div
             className="absolute top-1/5 right-1/6 text-primary/20 hidden md:block"
-              animate={{
+            animate={{
               y: [0, -30, 0],
               rotate: [0, 15, 0],
-            scale: [1, 1.1, 1]
-          }}
+              scale: [1, 1.1, 1]
+            }}
             transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        >
+          >
             <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
             </svg>
-        </motion.div>
-        <motion.div
+          </motion.div>
+          <motion.div
             className="absolute bottom-1/5 right-1/4 text-accent/20 hidden md:block"
-          animate={{ 
+            animate={{
               y: [0, 25, 0],
-            rotate: [0, -10, 0],
+              rotate: [0, -10, 0],
               scale: [1, 1.2, 1]
             }}
             transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
@@ -240,239 +251,96 @@ export const HeroSection = () => {
                 <div className="w-2 h-2 md:w-3 md:h-3 bg-red-500 rounded-full"></div>
                 <div className="w-2 h-2 md:w-3 md:h-3 bg-yellow-500 rounded-full"></div>
                 <div className="w-2 h-2 md:w-3 md:h-3 bg-green-500 rounded-full"></div>
-                <span className="text-muted-foreground ml-2 text-xs">advanced_ai_model.py</span>
+                <span className="text-muted-foreground ml-2 text-xs">app/services/survey_translation_service.rb</span>
               </div>
-              
-              <motion.div
-                className="text-secondary"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <span className="text-accent">import</span> <span className="text-primary">tensorflow</span> <span className="text-accent">as</span> <span className="text-primary">tf</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
-              >
-                <span className="text-accent">from</span> <span className="text-primary">tensorflow.keras</span> <span className="text-accent">import</span> <span className="text-primary">layers, models</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
-              >
-                <span className="text-accent">import</span> <span className="text-primary">numpy</span> <span className="text-accent">as</span> <span className="text-primary">np</span>
-              </motion.div>
-              
+
+              <CodeLine delay={0}>
+                <span className="text-accent">class</span> <span className="text-primary">SurveyTranslationService</span>
+              </CodeLine>
+              <CodeLine delay={0.2} indent={1}>
+                <span className="text-accent">include</span> <span className="text-primary">Sidekiq::Worker</span>
+              </CodeLine>
+
               <div className="mt-4"></div>
-              
-              <motion.div
-                className="text-secondary"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
-              >
-                <span className="text-accent">def</span> <span className="text-primary">create_neural_network</span><span className="text-muted-foreground">(</span><span className="text-accent">input_shape</span><span className="text-muted-foreground">,</span> <span className="text-accent">num_classes</span><span className="text-muted-foreground">):</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-4"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.8 }}
-              >
-                <span className="text-primary">model</span> <span className="text-muted-foreground">=</span> <span className="text-primary">models</span><span className="text-muted-foreground">.</span><span className="text-primary">Sequential</span><span className="text-muted-foreground">([</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-              >
-                <span className="text-primary">layers</span><span className="text-muted-foreground">.</span><span className="text-primary">Dense</span><span className="text-muted-foreground">(</span><span className="text-accent">512</span><span className="text-muted-foreground">,</span> <span className="text-accent">activation</span><span className="text-muted-foreground">=</span><span className="text-secondary">'relu'</span><span className="text-muted-foreground">,</span> <span className="text-accent">input_shape</span><span className="text-muted-foreground">=</span><span className="text-accent">input_shape</span><span className="text-muted-foreground">),</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 1.2 }}
-              >
-                <span className="text-primary">layers</span><span className="text-muted-foreground">.</span><span className="text-primary">Dropout</span><span className="text-muted-foreground">(</span><span className="text-accent">0.3</span><span className="text-muted-foreground">),</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 1.4 }}
-              >
-                <span className="text-primary">layers</span><span className="text-muted-foreground">.</span><span className="text-primary">Dense</span><span className="text-muted-foreground">(</span><span className="text-accent">256</span><span className="text-muted-foreground">,</span> <span className="text-accent">activation</span><span className="text-muted-foreground">=</span><span className="text-secondary">'relu'</span><span className="text-muted-foreground">),</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 1.6 }}
-              >
-                <span className="text-primary">layers</span><span className="text-muted-foreground">.</span><span className="text-primary">BatchNormalization</span><span className="text-muted-foreground">(),</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 1.8 }}
-              >
-                <span className="text-primary">layers</span><span className="text-muted-foreground">.</span><span className="text-primary">Dense</span><span className="text-muted-foreground">(</span><span className="text-accent">128</span><span className="text-muted-foreground">,</span> <span className="text-accent">activation</span><span className="text-muted-foreground">=</span><span className="text-secondary">'relu'</span><span className="text-muted-foreground">),</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 2 }}
-              >
-                <span className="text-primary">layers</span><span className="text-muted-foreground">.</span><span className="text-primary">Dropout</span><span className="text-muted-foreground">(</span><span className="text-accent">0.2</span><span className="text-muted-foreground">),</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 2.2 }}
-              >
-                <span className="text-primary">layers</span><span className="text-muted-foreground">.</span><span className="text-primary">Dense</span><span className="text-muted-foreground">(</span><span className="text-accent">num_classes</span><span className="text-muted-foreground">,</span> <span className="text-accent">activation</span><span className="text-muted-foreground">=</span><span className="text-secondary">'softmax'</span><span className="text-muted-foreground">)</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-4"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 2.4 }}
-              >
-                <span className="text-muted-foreground">])</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-4"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 2.6 }}
-              >
-                <span className="text-accent">return</span> <span className="text-accent">model</span>
-              </motion.div>
-              
+
+              <CodeLine delay={0.4} indent={1}>
+                <span className="text-accent">def</span> <span className="text-primary">initialize</span><span className="text-muted-foreground">(</span><span className="text-accent">survey</span><span className="text-muted-foreground">,</span> <span className="text-accent">locales</span><span className="text-muted-foreground">)</span>
+              </CodeLine>
+              <CodeLine delay={0.6} indent={2}>
+                <span className="text-primary">@survey</span> <span className="text-muted-foreground">=</span> <span className="text-accent">survey</span>
+              </CodeLine>
+              <CodeLine delay={0.8} indent={2}>
+                <span className="text-primary">@locales</span> <span className="text-muted-foreground">=</span> <span className="text-accent">locales</span>
+              </CodeLine>
+              <CodeLine delay={1} indent={1}>
+                <span className="text-accent">end</span>
+              </CodeLine>
+
               <div className="mt-4"></div>
-              
-              <motion.div
-                className="text-secondary"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 2.8 }}
-              >
-                <span className="text-accent">def</span> <span className="text-primary">train_model</span><span className="text-muted-foreground">(</span><span className="text-accent">model</span><span className="text-muted-foreground">,</span> <span className="text-accent">X_train</span><span className="text-muted-foreground">,</span> <span className="text-accent">y_train</span><span className="text-muted-foreground">,</span> <span className="text-accent">X_val</span><span className="text-muted-foreground">,</span> <span className="text-accent">y_val</span><span className="text-muted-foreground">):</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-4"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 3 }}
-              >
-                <span className="text-accent">model</span><span className="text-muted-foreground">.</span><span className="text-primary">compile</span><span className="text-muted-foreground">(</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 3.2 }}
-              >
-                <span className="text-accent">optimizer</span><span className="text-muted-foreground">=</span><span className="text-primary">tf</span><span className="text-muted-foreground">.</span><span className="text-primary">keras</span><span className="text-muted-foreground">.</span><span className="text-primary">optimizers</span><span className="text-muted-foreground">.</span><span className="text-primary">Adam</span><span className="text-muted-foreground">(</span><span className="text-accent">learning_rate</span><span className="text-muted-foreground">=</span><span className="text-accent">0.001</span><span className="text-muted-foreground">),</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 3.4 }}
-              >
-                <span className="text-accent">loss</span><span className="text-muted-foreground">=</span><span className="text-secondary">'categorical_crossentropy'</span><span className="text-muted-foreground">,</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 3.6 }}
-              >
-                <span className="text-accent">metrics</span><span className="text-muted-foreground">=[</span><span className="text-secondary">'accuracy'</span><span className="text-muted-foreground">,</span> <span className="text-secondary">'precision'</span><span className="text-muted-foreground">,</span> <span className="text-secondary">'recall'</span><span className="text-muted-foreground">]</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-4"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 3.8 }}
-              >
-                <span className="text-muted-foreground">)</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-4 mt-4"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 4 }}
-              >
-                <span className="text-accent">history</span> <span className="text-muted-foreground">=</span> <span className="text-accent">model</span><span className="text-muted-foreground">.</span><span className="text-primary">fit</span><span className="text-muted-foreground">(</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 4.2 }}
-              >
-                <span className="text-accent">X_train</span><span className="text-muted-foreground">,</span> <span className="text-accent">y_train</span><span className="text-muted-foreground">,</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 4.4 }}
-              >
-                <span className="text-accent">validation_data</span><span className="text-muted-foreground">=(</span><span className="text-accent">X_val</span><span className="text-muted-foreground">,</span> <span className="text-accent">y_val</span><span className="text-muted-foreground">),</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 4.6 }}
-              >
-                <span className="text-accent">epochs</span><span className="text-muted-foreground">=</span><span className="text-accent">100</span><span className="text-muted-foreground">,</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 4.8 }}
-              >
-                <span className="text-accent">batch_size</span><span className="text-muted-foreground">=</span><span className="text-accent">32</span><span className="text-muted-foreground">,</span>
-              </motion.div>
-              
-              <motion.div
-                className="text-secondary ml-8"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 5 }}
-              >
-                <span className="text-accent">verbose</span><span className="text-muted-foreground">=</span><span className="text-accent">1</span>
-        </motion.div>
-              
-        <motion.div
-                className="text-secondary ml-4"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 5.2 }}
-              >
-                <span className="text-muted-foreground">)</span>
-        </motion.div>
-              
-        <motion.div
-                className="text-secondary ml-4"
-                animate={{ opacity: [0.5, 1, 0.5] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 5.4 }}
-              >
-                <span className="text-accent">return</span> <span className="text-accent">history</span>
-              </motion.div>
+
+              <CodeLine delay={1.2} indent={1}>
+                <span className="text-accent">def</span> <span className="text-primary">call</span>
+              </CodeLine>
+              <CodeLine delay={1.4} indent={2}>
+                <span className="text-primary">@locales</span><span className="text-muted-foreground">.</span><span className="text-primary">each</span> <span className="text-accent">do</span> <span className="text-muted-foreground">|</span><span className="text-accent">locale</span><span className="text-muted-foreground">|</span>
+              </CodeLine>
+              <CodeLine delay={1.6} indent={3}>
+                <span className="text-primary">translate_questions</span><span className="text-muted-foreground">(</span><span className="text-accent">locale</span><span className="text-muted-foreground">)</span>
+              </CodeLine>
+              <CodeLine delay={1.8} indent={2}>
+                <span className="text-accent">end</span>
+              </CodeLine>
+              <CodeLine delay={2} indent={1}>
+                <span className="text-accent">end</span>
+              </CodeLine>
+
+              <div className="mt-4"></div>
+
+              <CodeLine delay={2.2} indent={1}>
+                <span className="text-accent">private</span>
+              </CodeLine>
+
+              <div className="mt-4"></div>
+
+              <CodeLine delay={2.4} indent={1}>
+                <span className="text-accent">def</span> <span className="text-primary">translate_questions</span><span className="text-muted-foreground">(</span><span className="text-accent">locale</span><span className="text-muted-foreground">)</span>
+              </CodeLine>
+              <CodeLine delay={2.6} indent={2}>
+                <span className="text-primary">@survey</span><span className="text-muted-foreground">.</span><span className="text-primary">questions</span><span className="text-muted-foreground">.</span><span className="text-primary">find_each</span> <span className="text-accent">do</span> <span className="text-muted-foreground">|</span><span className="text-accent">question</span><span className="text-muted-foreground">|</span>
+              </CodeLine>
+              <CodeLine delay={2.8} indent={3}>
+                <span className="text-accent">text</span> <span className="text-muted-foreground">=</span> <span className="text-primary">Translator</span><span className="text-muted-foreground">.</span><span className="text-primary">translate</span><span className="text-muted-foreground">(</span><span className="text-accent">question</span><span className="text-muted-foreground">.</span><span className="text-primary">text</span><span className="text-muted-foreground">,</span> <span className="text-accent">to:</span> <span className="text-accent">locale</span><span className="text-muted-foreground">)</span>
+              </CodeLine>
+              <CodeLine delay={3} indent={3}>
+                <span className="text-accent">question</span><span className="text-muted-foreground">.</span><span className="text-primary">translations</span><span className="text-muted-foreground">.</span><span className="text-primary">create!</span><span className="text-muted-foreground">(</span><span className="text-accent">locale:</span> <span className="text-accent">locale</span><span className="text-muted-foreground">,</span> <span className="text-accent">text:</span> <span className="text-accent">text</span><span className="text-muted-foreground">)</span>
+              </CodeLine>
+              <CodeLine delay={3.2} indent={2}>
+                <span className="text-accent">end</span>
+              </CodeLine>
+              <CodeLine delay={3.4} indent={1}>
+                <span className="text-accent">end</span>
+              </CodeLine>
+
+              <div className="mt-4"></div>
+
+              <CodeLine delay={3.6} indent={1}>
+                <span className="text-accent">def</span> <span className="text-primary">archive_recording</span><span className="text-muted-foreground">(</span><span className="text-accent">call</span><span className="text-muted-foreground">)</span>
+              </CodeLine>
+              <CodeLine delay={3.8} indent={2}>
+                <span className="text-accent">s3</span> <span className="text-muted-foreground">=</span> <span className="text-primary">Aws::S3::Resource</span><span className="text-muted-foreground">.</span><span className="text-primary">new</span><span className="text-muted-foreground">(</span><span className="text-accent">region:</span> <span className="text-secondary">'us-east-1'</span><span className="text-muted-foreground">)</span>
+              </CodeLine>
+              <CodeLine delay={4} indent={2}>
+                <span className="text-accent">s3</span><span className="text-muted-foreground">.</span><span className="text-primary">bucket</span><span className="text-muted-foreground">(</span><span className="text-secondary">'recordings'</span><span className="text-muted-foreground">).</span><span className="text-primary">object</span><span className="text-muted-foreground">(</span><span className="text-accent">call</span><span className="text-muted-foreground">.</span><span className="text-primary">sid</span><span className="text-muted-foreground">).</span><span className="text-primary">upload_file</span><span className="text-muted-foreground">(</span><span className="text-accent">call</span><span className="text-muted-foreground">.</span><span className="text-primary">recording_path</span><span className="text-muted-foreground">)</span>
+              </CodeLine>
+              <CodeLine delay={4.2} indent={1}>
+                <span className="text-accent">end</span>
+              </CodeLine>
+              <CodeLine delay={4.4}>
+                <span className="text-accent">end</span>
+              </CodeLine>
             </div>
-        </motion.div>
-      </div>
+          </motion.div>
+        </div>
       </div>
 
 
@@ -489,9 +357,9 @@ export const HeroSection = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <Brain className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+          <Server className="w-6 h-6 md:w-8 md:h-8 text-primary" />
           <Sparkles className="w-4 h-4 md:w-6 md:h-6 text-accent" />
-          <Cpu className="w-6 h-6 md:w-8 md:h-8 text-primary" />
+          <Code className="w-6 h-6 md:w-8 md:h-8 text-primary" />
         </motion.div>
 
         <motion.h1
@@ -501,7 +369,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           whileHover={{ scale: 1.05 }}
         >
-          Hi I am <span className="text-shimmer">Mahad Khalid</span>
+          Hi I am <span className="text-shimmer">Burraq Ur Rehman</span>
         </motion.h1>
 
         <motion.div
@@ -511,7 +379,7 @@ export const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <p className="text-sm sm:text-base md:text-lg text-muted-foreground mb-8 md:mb-10 max-w-4xl mx-auto leading-relaxed px-4">
-            Crafting intelligent, future-ready solutions with <span className="text-primary font-semibold">Generative AI</span>, full-stack Web development, and React Native <span className="text-primary font-semibold">mobile apps</span>. I build scalable AI-powered platforms, modern digital experiences, and explore emerging <span className="text-primary font-semibold">Web3</span> and blockchain technologies to deliver secure, innovative products turning complex challenges into high-impact solutions, one algorithm, model, and line of code at a time.
+            Crafting robust, production-ready applications with <span className="text-primary font-semibold">Ruby on Rails</span>, full-stack web development, and modern <span className="text-primary font-semibold">React &amp; TypeScript</span> frontends. I build scalable SaaS platforms, REST APIs, and cloud-native solutions on <span className="text-primary font-semibold">AWS</span> — mentoring teams, optimizing performance, and turning complex business challenges into high-impact software, one commit at a time.
           </p>
 
           {/* Primary CTA Buttons */}
@@ -556,17 +424,7 @@ export const HeroSection = () => {
               whileTap={{ scale: 0.95 }}
             >
               <MessageCircle className="w-4 h-4 inline mr-2" />
-              Get Advice
-            </motion.button>
-
-            <motion.button
-              onClick={scrollToProjects}
-              className="px-4 py-2 bg-transparent border border-muted-foreground/30 text-muted-foreground rounded-md text-sm font-medium hover:border-primary hover:text-primary transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Smartphone className="w-4 h-4 inline mr-2" />
-              Get Apps
+              Get In Touch
             </motion.button>
 
             <motion.button
@@ -576,8 +434,19 @@ export const HeroSection = () => {
               whileTap={{ scale: 0.95 }}
             >
               <Code className="w-4 h-4 inline mr-2" />
-              Get Software
+              View Projects
             </motion.button>
+
+            <motion.a
+              href="/Burraq_Ur_Rehman_Resume.pdf"
+              download="Burraq_Ur_Rehman_Resume.pdf"
+              className="px-4 py-2 bg-transparent border border-muted-foreground/30 text-muted-foreground rounded-md text-sm font-medium hover:border-primary hover:text-primary transition-all duration-300 inline-flex items-center"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Download className="w-4 h-4 inline mr-2" />
+              Download CV
+            </motion.a>
           </motion.div>
         </motion.div>
       </motion.div>
