@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Bold "B" mark — emerald with a diagonal cut and dark teal triangle -->
+  <defs>
+    <mask id="gap">
+      <rect width="512" height="512" fill="white" />
+      <!-- Diagonal stripe cut between the B and the triangle -->
+      <polygon points="0,176 336,512 276,512 0,236" fill="black" />
+    </mask>
+  </defs>
+
+  <!-- Letter B -->
+  <path
+    mask="url(#gap)"
+    fill="#059669"
+    fill-rule="evenodd"
+    d="M96 48
+       H312
+       C404 48 462 100 462 172
+       C462 220 436 252 396 266
+       C448 280 478 318 478 372
+       C478 446 414 464 322 464
+       H96
+       Z
+       M186 122
+       H300
+       C346 122 372 140 372 176
+       C372 212 346 230 300 230
+       H186
+       Z
+       M186 296
+       H316
+       C362 296 388 312 388 348
+       C388 384 362 402 316 402
+       H186
+       Z" />
+
+  <!-- Dark teal triangle in the bottom-left -->
+  <polygon fill="#134e4a" points="96,464 96,332 228,464" />
+</svg>
