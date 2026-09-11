@@ -224,7 +224,7 @@ export const HeroSectionNew = () => {
             variant="outline"
             className="group border-2 border-primary/30 hover:border-primary/50 hover:bg-primary/5"
           >
-            <a href="/Burraq_Ur_Rehman_Resume.pdf" download="Burraq_Ur_Rehman_Resume.pdf">
+            <a href="/Burraq-Ur-Rehman-Resume.pdf" download="Burraq-Ur-Rehman-Resume.pdf">
               <span className="flex items-center gap-2">
                 <Download className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
                 Download CV

@@ -438,8 +438,8 @@ export const HeroSection = () => {
             </motion.button>
 
             <motion.a
-              href="/Burraq_Ur_Rehman_Resume.pdf"
-              download="Burraq_Ur_Rehman_Resume.pdf"
+              href="/Burraq-Ur-Rehman-Resume.pdf"
+              download="Burraq-Ur-Rehman-Resume.pdf"
               className="px-4 py-2 bg-transparent border border-muted-foreground/30 text-muted-foreground rounded-md text-sm font-medium hover:border-primary hover:text-primary transition-all duration-300 inline-flex items-center"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
